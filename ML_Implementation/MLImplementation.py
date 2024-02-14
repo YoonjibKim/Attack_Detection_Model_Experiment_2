@@ -40,12 +40,6 @@ class MLImplementation:
         self.__cs_stat_time_delta_dict, self.__gs_stat_time_delta_dict, self.__cs_top_dict, self.__gs_top_dict \
             = self.__load_dataset()
 
-    def __replicate_structure_with_value(self, lst, value=Constant.DUMMY_DATA):
-        if isinstance(lst, list):
-            return [self.__replicate_structure_with_value(sublist, value) for sublist in lst]
-        else:
-            return value
-
     def __run_other_mls(self, training_feature_array, training_label_array,
                         testing_feature_array, testing_label_array) -> dict:
         adaBoostResult = self.__adaBoostModel.run(training_feature_array, training_label_array,
@@ -121,7 +115,7 @@ class MLImplementation:
 
         return cs_stat_time_delta_dict, gs_stat_time_delta_dict, cs_top_dict, gs_top_dict
 
-    def __analyze_top(self, dataset_dict, dnn_save_path, other_save_path):
+    def __analyze_top_symbol_tournament(self, dataset_dict, dnn_save_path, other_save_path):
         dnn_cs_top_result_dict = {}
         other_cs_top_result_dict = {}
         for scenario, category_dict in dataset_dict.items():
@@ -149,17 +143,21 @@ class MLImplementation:
                             testing_feature_array = np.array(temp_dict[Constant.TESTING_FEATURE])
                             testing_label_array = np.array(testing_label_list).reshape(-1, 1)
 
-                            # print('DNN')
-                            # dnn_param_result_dict = self.__dNNModel.run(training_feature_array, training_label_array,
-                            #                                             testing_feature_array, testing_label_array,
-                            #                                             temp_type, Constant.CS_TOP)
-                            # dnn_param_symbol_dict[symbol] = dnn_param_result_dict
-                            dnn_param_symbol_dict[symbol] = None
+                            print('DNN')
+                            dnn_param_result_dict = self.__dNNModel.run(training_feature_array, training_label_array,
+                                                                        testing_feature_array, testing_label_array,
+                                                                        temp_type, Constant.CS_TOP,
+                                                                        Constant.Hierarchy.SYMBOL,
+                                                                        Constant.DNNParameters.LearningRate.STEP_3)
+                            dnn_param_symbol_dict[symbol] = dnn_param_result_dict
+                            # dnn_param_symbol_dict[symbol] = None
 
-                            print('Other MLs')
-                            other_param_result_dict = self.__run_other_mls(training_feature_array, training_label_array,
-                                                                           testing_feature_array, testing_label_array)
-                            other_param_feature_type_dict[symbol] = other_param_result_dict
+                            # print('Other MLs')
+                            # other_param_result_dict \
+                            #     = self.__run_other_mls(training_feature_array, training_label_array,
+                            #                            testing_feature_array, testing_label_array)
+                            # other_param_feature_type_dict[symbol] = other_param_result_dict
+                            other_param_feature_type_dict[symbol] = None
 
                     dnn_param_feature_type_dict[feature_type] = dnn_param_symbol_dict
                     other_param_feature_type_dict[feature_type] = other_param_symbol_dict
@@ -170,10 +168,10 @@ class MLImplementation:
 
         with open(Constant.FileSave.DNN_CS_TOP_FILE_PATH, 'w') as f:
             json.dump(dnn_cs_top_result_dict, f)
-        with open(Constant.FileSave.OTHER_CS_TOP_FILE_PATH, 'w') as f:
-            json.dump(other_cs_top_result_dict, f)
+        # with open(Constant.FileSave.OTHER_CS_TOP_FILE_PATH, 'w') as f:
+        #     json.dump(other_cs_top_result_dict, f)
 
-    def __analyze_stat_time_delta(self, dataset_dict, dnn_save_path, other_save_path):
+    def __analyze_stat_time_delta_category_tournament(self, dataset_dict, dnn_save_path, other_save_path):
         dnn_cs_stat_time_delta_result_dict = {}
         other_cs_stat_time_delta_result_dict = {}
         for scenario, category_dict in dataset_dict.items():
@@ -188,40 +186,43 @@ class MLImplementation:
                 testing_feature_array = np.array(temp_dict[Constant.TESTING_FEATURE])
                 testing_label_array = np.array(temp_dict[Constant.TESTING_LABEL]).reshape(-1, 1)
 
-                # print('DNN')
-                # dnn_param_result_dict \
-                #     = self.__dNNModel.run(training_feature_array, training_label_array, testing_feature_array,
-                #                           testing_label_array, temp_type, Constant.CS_STAT_TIME_DELTA)
-                # dnn_param_category_dict[category] = dnn_param_result_dict
-                dnn_param_category_dict[category] = None
-
-                print('Other MLs')
-                other_param_category_dict[category] = self.__run_other_mls(training_feature_array, training_label_array,
-                                                                           testing_feature_array, testing_label_array)
+                print('DNN')
+                dnn_param_result_dict \
+                    = self.__dNNModel.run(training_feature_array, training_label_array, testing_feature_array,
+                                          testing_label_array, temp_type, Constant.CS_STAT_TIME_DELTA,
+                                          Constant.Hierarchy.CATEGORY, Constant.DNNParameters.LearningRate.STEP_3)
+                dnn_param_category_dict[category] = dnn_param_result_dict
+                # dnn_param_category_dict[category] = None
+                #
+                # print('Other MLs')
+                # other_param_category_dict[category] \
+                #     = self.__run_other_mls(training_feature_array, training_label_array,
+                #                            testing_feature_array, testing_label_array)
+                other_param_category_dict[category] = None
 
             dnn_cs_stat_time_delta_result_dict[scenario] = dnn_param_category_dict
             other_cs_stat_time_delta_result_dict[scenario] = other_param_category_dict
 
         with open(dnn_save_path, 'w') as f:
             json.dump(dnn_cs_stat_time_delta_result_dict, f)
-        with open(other_save_path, 'w') as f:
-            json.dump(other_cs_stat_time_delta_result_dict, f)
+        # with open(other_save_path, 'w') as f:
+        #     json.dump(other_cs_stat_time_delta_result_dict, f)
 
     def run(self):
         print('Running MLs')
 
-        self.__analyze_top(self.__cs_top_dict, Constant.FileSave.DNN_CS_TOP_FILE_PATH,
-                           Constant.FileSave.OTHER_CS_TOP_FILE_PATH)
+        self.__analyze_top_symbol_tournament(self.__cs_top_dict, Constant.FileSave.DNN_CS_TOP_FILE_PATH,
+                                             Constant.FileSave.OTHER_CS_TOP_FILE_PATH)
 
-        # self.__analyze_top(self.__gs_top_dict, Constant.FileSave.DNN_GS_TOP_FILE_PATH,
-        #                    Constant.FileSave.OTHER_GS_TOP_FILE_PATH)
-        #
-        # self.__analyze_stat_time_delta(self.__cs_stat_time_delta_dict,
-        #                                Constant.FileSave.DNN_CS_STAT_TIME_DELTA_FILE_PATH,
-        #                                Constant.FileSave.OTHER_CS_STAT_TIME_DELTA_FILE_PATH)
-        #
-        # self.__analyze_stat_time_delta(self.__gs_stat_time_delta_dict,
-        #                                Constant.FileSave.DNN_GS_STAT_TIME_DELTA_FILE_PATH,
-        #                                Constant.FileSave.OTHER_GS_STAT_TIME_DELTA_FILE_PATH)
+        self.__analyze_top_symbol_tournament(self.__gs_top_dict, Constant.FileSave.DNN_GS_TOP_FILE_PATH,
+                                             Constant.FileSave.OTHER_GS_TOP_FILE_PATH)
+
+        self.__analyze_stat_time_delta_category_tournament(self.__cs_stat_time_delta_dict,
+                                                           Constant.FileSave.DNN_CS_STAT_TIME_DELTA_FILE_PATH,
+                                                           Constant.FileSave.OTHER_CS_STAT_TIME_DELTA_FILE_PATH)
+
+        self.__analyze_stat_time_delta_category_tournament(self.__gs_stat_time_delta_dict,
+                                                           Constant.FileSave.DNN_GS_STAT_TIME_DELTA_FILE_PATH,
+                                                           Constant.FileSave.OTHER_GS_STAT_TIME_DELTA_FILE_PATH)
 
         print('Running MLs is done.')

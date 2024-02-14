@@ -70,6 +70,32 @@ DUMMY_DATA = -1.0
 ATTACK_LABEL = 1
 NORMAL_LABEL = 0
 
+CLASSIFICATION_REPORT = 'CLASSIFICATION_REPORT'
+EPOCHS = 'EPOCHS'
+LEARNING_RATE = 'LEARNING_RATE'
+
+HIERARCHY = 'HIERARCHY'
+
+
+class Hierarchy:
+    FINAL = 'FINAL'
+    SCENARIO = 'SCENARIO'
+    CATEGORY = 'CATEGORY'
+    TYPE = 'TYPE'
+    SYMBOL = 'SYMBOL'
+
+
+class DNNParameters:
+    epochStep = {Hierarchy.FINAL: 3200, Hierarchy.SCENARIO: 1600, Hierarchy.CATEGORY: 800,
+                 Hierarchy.TYPE: 400, Hierarchy.SYMBOL: 100}
+
+    class LearningRate:
+        STEP_1 = 0.01
+        STEP_2 = 0.001
+        STEP_3 = 0.0001  # base
+        STEP_4 = 0.00001
+        STEP_5 = 0.000001
+
 
 class FileLoad:
     __STAT_TIME_DELTA_DIR_PATH = 'Dataset/STAT_TIME_DELTA'

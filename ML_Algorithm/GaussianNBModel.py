@@ -12,7 +12,9 @@ class GaussianNBModel:
 
         clf_gnb = GaussianNB()
         clf_gnb.fit(X_train_scaled, training_label_array.ravel())
+
         predictions = clf_gnb.predict(X_test_scaled)
+
         report = classification_report(testing_label_array, predictions, output_dict=True, zero_division=0)
 
         return report

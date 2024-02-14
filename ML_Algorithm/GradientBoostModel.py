@@ -12,7 +12,9 @@ class GradientBoostModel:
 
         clf_gbt = GradientBoostingClassifier(random_state=0)
         clf_gbt.fit(X_train_scaled, y_train.ravel())
+
         predictions = clf_gbt.predict(X_test_scaled)
+
         report = classification_report(y_test, predictions, output_dict=True, zero_division=0)
 
         return report
