@@ -2,9 +2,10 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import StandardScaler
 
+
 class AdaBoostModel:
     @classmethod
-    def run(cls, X_train, y_train, X_test, y_test):
+    def run(cls, X_train, y_train, X_test, y_test) -> dict:
         # 데이터 표준화
         scaler = StandardScaler()
         X_train_scaled = scaler.fit_transform(X_train)

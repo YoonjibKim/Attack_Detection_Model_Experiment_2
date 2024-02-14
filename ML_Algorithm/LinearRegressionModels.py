@@ -4,9 +4,9 @@ from sklearn.metrics import classification_report
 from sklearn.preprocessing import StandardScaler
 
 
-class Linear_Regressions:
+class LinearRegressionModels:
     @classmethod
-    def linear_regressions_run(cls, X_tn, y_tn, X_te, y_te):
+    def run(cls, X_tn, y_tn, X_te, y_te):
         std_scale = StandardScaler()
         std_scale.fit(X_tn)
         X_tn_std = std_scale.transform(X_tn)

@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 
 class GaussianNBModel:
     @classmethod
-    def run(cls, training_feature_array, training_label_array, testing_feature_array, testing_label_array):
+    def run(cls, training_feature_array, training_label_array, testing_feature_array, testing_label_array) -> dict:
         scaler = StandardScaler()
         X_train_scaled = scaler.fit_transform(training_feature_array)
         X_test_scaled = scaler.transform(testing_feature_array)

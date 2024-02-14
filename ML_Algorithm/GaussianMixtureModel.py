@@ -3,9 +3,9 @@ from sklearn.mixture import GaussianMixture
 from sklearn.preprocessing import StandardScaler  # 표준화를 위해 StandardScaler import
 
 
-class Gaussian_Mixture:
+class GaussianMixtureModel:
     @classmethod
-    def gaussian_mixture_run(cls, X, y):
+    def run(cls, X, y) -> dict:
         # 표준화를 위한 StandardScaler 인스턴스화
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(X)  # 데이터 표준화

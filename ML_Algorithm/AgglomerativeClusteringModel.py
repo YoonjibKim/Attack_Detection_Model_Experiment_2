@@ -2,9 +2,10 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import StandardScaler
 
+
 class AgglomerativeClusteringModel:
     @classmethod
-    def run(cls, X, y):
+    def run(cls, X, y) -> dict:
         # 데이터 표준화
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(X)
