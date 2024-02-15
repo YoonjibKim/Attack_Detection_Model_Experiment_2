@@ -18,3 +18,6 @@ class DecisionTreeModel:
         report = classification_report(y_test, predictions, output_dict=True, zero_division=0)
 
         return report
+
+    def grid_run(self):
+        pass

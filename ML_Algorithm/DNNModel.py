@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 class DNNModel:
     @classmethod
     def run(cls, training_feature_array, training_label_array, testing_feature_array, testing_label_array,
-            combined_type, feature_type, epoch_step, learning_rate) -> dict:
+            epoch_step, learning_rate, loss_rate_file_path) -> dict:
         epochs = Constant.DNNParameters.epochStep[epoch_step]
 
         patience = epochs  # 추후 조정 필요
@@ -72,15 +72,12 @@ class DNNModel:
         plt.figure(figsize=(10, 4))
         plt.plot(history.history['loss'], label='Training Loss')
         plt.plot(history.history['val_loss'], label='Validation Loss')
-        plt.title(combined_type + ' Loss over Epochs at ' + str(actual_epochs) +
-                  ', Learning Rate at ' + str(learning_rate) + ', and Hierarchy at ' + str(epoch_step))
+        plt.title('Loss over Epochs at ' + str(actual_epochs) + ', Learning Rate at ' + str(learning_rate))
         plt.ylabel('Loss')
         plt.xlabel('Epoch')
         plt.legend(loc='upper right')
 
-        file_path = (Constant.FileSave.DNN_LOSS_RATE_FILE + '/' + feature_type + '/' +
-                     combined_type + '_' + str(actual_epochs) + '.png')
-        plt.savefig(file_path)
+        plt.savefig(loss_rate_file_path)
         plt.close()
 
         pred_x = model.predict(X_test_scaled)
@@ -90,9 +87,11 @@ class DNNModel:
 
         results = {
             Constant.CLASSIFICATION_REPORT: class_report,
-            Constant.HIERARCHY: epoch_step,
             Constant.EPOCHS: actual_epochs,
             Constant.LEARNING_RATE: learning_rate
         }
 
         return results
+
+    def grid_run(self):
+        pass

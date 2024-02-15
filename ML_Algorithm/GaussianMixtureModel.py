@@ -16,3 +16,6 @@ class GaussianMixtureModel:
         class_report = classification_report(y, label_gmm, output_dict=True, zero_division=0)
 
         return class_report
+
+    def grid_run(self):
+        pass

@@ -18,3 +18,6 @@ class SVMModel:
         report = classification_report(y_test, predictions, zero_division=0, output_dict=True)
 
         return report
+
+    def grid_run(self):
+        pass

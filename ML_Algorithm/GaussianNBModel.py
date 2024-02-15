@@ -18,3 +18,6 @@ class GaussianNBModel:
         report = classification_report(testing_label_array, predictions, output_dict=True, zero_division=0)
 
         return report
+    
+    def grid_run(self):
+        pass

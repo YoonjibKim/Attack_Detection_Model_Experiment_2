@@ -21,3 +21,6 @@ class DBSCANModel:
         class_report = classification_report(y, labels, output_dict=True, zero_division=0, labels=unique_labels)
 
         return class_report
+
+    def grid_run(self):
+        pass

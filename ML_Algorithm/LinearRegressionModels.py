@@ -33,3 +33,6 @@ class LinearRegressionModels:
         class_report_elastic = classification_report(y_te, np.round(pred_elastic), zero_division=0, output_dict=True)
 
         return class_report_lr, class_report_ridge, class_report_lasso, class_report_elastic
+
+    def grid_run(self):
+        pass

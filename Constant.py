@@ -52,10 +52,8 @@ SCENARIO_NAME_DICT = {CID_RCOFF_GOFF: CORRECT_ID_RANDOM_CS_OFF_GAUSSIAN_OFF,
 CS = 'CS'
 GS = 'GS'
 
-CS_STAT_TIME_DELTA = 'CS_STAT_TIME_DELTA'
-GS_STAT_TIME_DELTA = 'GS_STAT_TIME_DELTA'
-CS_TOP = 'CS_TOP'
-GS_TOP = 'GS_TOP'
+STAT_TIME_DELTA = 'STAT_TIME_DELTA'
+TOP = 'TOP'
 
 TRAINING_FEATURE = 'training_feature'
 TRAINING_LABEL = 'training_label'
@@ -78,16 +76,15 @@ HIERARCHY = 'HIERARCHY'
 
 
 class Hierarchy:
-    FINAL = 'FINAL'
-    SCENARIO = 'SCENARIO'
-    CATEGORY = 'CATEGORY'
-    TYPE = 'TYPE'
-    SYMBOL = 'SYMBOL'
+    SCENARIO = 'Scenario'
+    CATEGORY = 'Category'
+    TYPE = 'Type'
+    SYMBOL = 'Symbol'
 
 
 class DNNParameters:
-    epochStep = {Hierarchy.FINAL: 3200, Hierarchy.SCENARIO: 1600, Hierarchy.CATEGORY: 800,
-                 Hierarchy.TYPE: 400, Hierarchy.SYMBOL: 100}
+    epochStep = {Hierarchy.SCENARIO: 6400, Hierarchy.CATEGORY: 1600,
+                 Hierarchy.TYPE: 800, Hierarchy.SYMBOL: 100}
 
     class LearningRate:
         STEP_1 = 0.01
@@ -98,28 +95,128 @@ class DNNParameters:
 
 
 class FileLoad:
-    __STAT_TIME_DELTA_DIR_PATH = 'Dataset/STAT_TIME_DELTA'
-    __TOP_DIR_PATH = 'Dataset/TOP'
-    CS_STAT_TIME_DELTA_DIR_PATH = __STAT_TIME_DELTA_DIR_PATH + '/' + CS
-    GS_STAT_TIME_DELTA_DIR_PATH = __STAT_TIME_DELTA_DIR_PATH + '/' + GS
-    CS_TOP_DIR_PATH = __TOP_DIR_PATH + '/' + CS
-    GS_TOP_DIR_PATH = __TOP_DIR_PATH + '/' + GS
+    STAT_TIME_DELTA_DIR_PATH = 'Dataset/STAT_TIME_DELTA'
+    TOP_DIR_PATH = 'Dataset/TOP'
+    CS_STAT_TIME_DELTA_DIR_PATH = STAT_TIME_DELTA_DIR_PATH + '/' + CS
+    GS_STAT_TIME_DELTA_DIR_PATH = STAT_TIME_DELTA_DIR_PATH + '/' + GS
+    CS_TOP_DIR_PATH = TOP_DIR_PATH + '/' + CS
+    GS_TOP_DIR_PATH = TOP_DIR_PATH + '/' + GS
 
 
 class FileSave:
+    ML_RESULT = 'ML_Result'
+    DNN = 'DNN'
+    OTHERS = 'Others'
     CLASSIFICATION_RESULT = 'Classification_Result'
-    __DNN_DIR_PATH = 'ML_Result/DNN'
-    DNN_LOSS_RATE_FILE = __DNN_DIR_PATH + '/loss_rate'
-    DNN_CS_STAT_TIME_DELTA_FILE_PATH = __DNN_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/CS_STAT_TIME_DELTA.json'
-    DNN_GS_STAT_TIME_DELTA_FILE_PATH = __DNN_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/GS_STAT_TIME_DELTA.json'
-    DNN_CS_TOP_FILE_PATH = __DNN_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/CS_TOP.json'
-    DNN_GS_TOP_FILE_PATH = __DNN_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/GS_TOP.json'
+    LOSS_RATE = 'Loss_Rate'
+    CR_FILE_NAME = 'result.json'
+    LR_FILE_NAME = 'loss_rate.png'
 
-    __OTHER_DIR_PATH = 'ML_Result/Others'
-    OTHER_CS_STAT_TIME_DELTA_FILE_PATH = __OTHER_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/CS_STAT_TIME_DELTA.json'
-    OTHER_GS_STAT_TIME_DELTA_FILE_PATH = __OTHER_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/GS_TIME_DELTA.json'
-    OTHER_CS_TOP_FILE_PATH = __OTHER_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/CS_TOP.json'
-    OTHER_GS_TOP_FILE_PATH = __OTHER_DIR_PATH + '/' + CLASSIFICATION_RESULT + '/GS_TOP.json'
+    DNN_CR_CS_STD_CATEGORY = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    DNN_CR_CS_STD_SCENARIO = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    DNN_CR_CS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                              '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    DNN_CR_CS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                              '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    DNN_CR_CS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                            '/' + Hierarchy.SYMBOL + '/' + CR_FILE_NAME)
+    DNN_CR_CS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                          '/' + Hierarchy.TYPE + '/' + CR_FILE_NAME)
+
+    DNN_CR_GS_STD_CATEGORY = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    DNN_CR_GS_STD_SCENARIO = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    DNN_CR_GS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                              '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    DNN_CR_GS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                              '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    DNN_CR_GS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                            '/' + Hierarchy.SYMBOL + '/' + CR_FILE_NAME)
+    DNN_CR_GS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                          '/' + Hierarchy.TYPE + '/' + CR_FILE_NAME)
+
+    DNN_LR_CS_STD_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+    DNN_LR_CS_STD_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+    DNN_LR_CS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.CATEGORY +
+                              '/' + LR_FILE_NAME)
+    DNN_LR_CS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.SCENARIO +
+                              '/' + LR_FILE_NAME)
+    DNN_LR_CS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.SYMBOL +
+                            '/' + LR_FILE_NAME)
+    DNN_LR_CS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.TYPE +
+                          '/' + LR_FILE_NAME)
+
+    DNN_LR_GS_STD_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+    DNN_LR_GS_STD_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
+                              '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+    DNN_LR_GS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.CATEGORY +
+                              '/' + LR_FILE_NAME)
+    DNN_LR_GS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.SCENARIO +
+                              '/' + LR_FILE_NAME)
+    DNN_LR_GS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.SYMBOL +
+                            '/' + LR_FILE_NAME)
+    DNN_LR_GS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.TYPE +
+                          '/' + LR_FILE_NAME)
+
+    # ----------------------------------------------------------------------------------------------------------------
+
+    OTHER_CR_CS_STD_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS +
+                                '/' + STAT_TIME_DELTA + '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    OTHER_CR_CS_STD_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS +
+                                '/' + STAT_TIME_DELTA + '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    OTHER_CR_CS_TOP_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                                '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    OTHER_CR_CS_TOP_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                                '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    OTHER_CR_CS_TOP_SYMBOL = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                              '/' + Hierarchy.SYMBOL + '/' + CR_FILE_NAME)
+    OTHER_CR_CS_TOP_TYPE = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
+                            '/' + Hierarchy.TYPE + '/' + CR_FILE_NAME)
+
+    OTHER_CR_GS_STD_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/'
+                                + STAT_TIME_DELTA + '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    OTHER_CR_GS_STD_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/'
+                                + STAT_TIME_DELTA + '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    OTHER_CR_GS_TOP_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                                '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
+    OTHER_CR_GS_TOP_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                                '/' + Hierarchy.SCENARIO + '/' + CR_FILE_NAME)
+    OTHER_CR_GS_TOP_SYMBOL = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                              '/' + Hierarchy.SYMBOL + '/' + CR_FILE_NAME)
+    OTHER_CR_GS_TOP_TYPE = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
+                            '/' + Hierarchy.TYPE + '/' + CR_FILE_NAME)
+
+    OTHER_LR_CS_STD_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
+                                '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+    OTHER_LR_CS_STD_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
+                                '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+    OTHER_LR_CS_TOP_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
+                                + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+    OTHER_LR_CS_TOP_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
+                                + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+    OTHER_LR_CS_TOP_SYMBOL = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
+                              + Hierarchy.SYMBOL + '/' + LR_FILE_NAME)
+    OTHER_LR_CS_TOP_TYPE = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
+                            + Hierarchy.TYPE + '/' + LR_FILE_NAME)
+
+    OTHER_LR_GS_STD_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
+                                '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+    OTHER_LR_GS_STD_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
+                                '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+    OTHER_LR_GS_TOP_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
+                                '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+    OTHER_LR_GS_TOP_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
+                                '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+    OTHER_LR_GS_TOP_SYMBOL = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
+                              '/' + Hierarchy.SYMBOL + '/' + LR_FILE_NAME)
+    OTHER_LR_GS_TOP_TYPE = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
+                            '/' + Hierarchy.TYPE + '/' + LR_FILE_NAME)
 
 
 class MLType:
