@@ -115,7 +115,7 @@ class MLImplementation:
 
         return cs_stat_time_delta_dict, gs_stat_time_delta_dict, cs_top_dict, gs_top_dict
 
-    def __analyze_top_symbol_tournament(self, dataset_dict, dnn_save_path, other_save_path, loss_rate_save_path):
+    def __analyze_top_symbol_tournament(self, dataset_dict, dnn_save_path, other_save_path, loss_rate_save_dir):
         dnn_cs_top_result_dict = {}
         other_cs_top_result_dict = {}
         for scenario, category_dict in dataset_dict.items():
@@ -144,11 +144,13 @@ class MLImplementation:
                             testing_label_array = np.array(testing_label_list).reshape(-1, 1)
 
                             print('DNN')
+                            loss_rate_file_name = temp_type + '.png'
+                            loss_rate_file_path = loss_rate_save_dir + '/' + loss_rate_file_name
                             dnn_param_result_dict = self.__dNNModel.run(training_feature_array, training_label_array,
                                                                         testing_feature_array, testing_label_array,
                                                                         Constant.Hierarchy.SYMBOL,
                                                                         Constant.DNNParameters.LearningRate.STEP_3,
-                                                                        loss_rate_save_path)
+                                                                        loss_rate_file_path)
                             dnn_param_symbol_dict[symbol] = dnn_param_result_dict
                             # dnn_param_symbol_dict[symbol] = None
 
@@ -172,7 +174,7 @@ class MLImplementation:
         #     json.dump(other_cs_top_result_dict, f)
 
     def __analyze_stat_time_delta_category_tournament(self, dataset_dict, dnn_save_path, other_save_path,
-                                                      loss_rate_save_path):
+                                                      loss_rate_save_dir):
         dnn_cs_stat_time_delta_result_dict = {}
         other_cs_stat_time_delta_result_dict = {}
         for scenario, category_dict in dataset_dict.items():
@@ -188,10 +190,12 @@ class MLImplementation:
                 testing_label_array = np.array(temp_dict[Constant.TESTING_LABEL]).reshape(-1, 1)
 
                 print('DNN')
+                loss_rate_file_name = temp_type + '.png'
+                loss_rate_file_path = loss_rate_save_dir + '/' + loss_rate_file_name
                 dnn_param_result_dict \
                     = self.__dNNModel.run(training_feature_array, training_label_array, testing_feature_array,
                                           testing_label_array, Constant.Hierarchy.CATEGORY,
-                                          Constant.DNNParameters.LearningRate.STEP_3, loss_rate_save_path)
+                                          Constant.DNNParameters.LearningRate.STEP_3, loss_rate_file_path)
                 dnn_param_category_dict[category] = dnn_param_result_dict
                 # dnn_param_category_dict[category] = None
 

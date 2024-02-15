@@ -110,7 +110,6 @@ class FileSave:
     CLASSIFICATION_RESULT = 'Classification_Result'
     LOSS_RATE = 'Loss_Rate'
     CR_FILE_NAME = 'result.json'
-    LR_FILE_NAME = 'loss_rate.png'
 
     DNN_CR_CS_STD_CATEGORY = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + STAT_TIME_DELTA +
                               '/' + Hierarchy.CATEGORY + '/' + CR_FILE_NAME)
@@ -139,30 +138,22 @@ class FileSave:
                           '/' + Hierarchy.TYPE + '/' + CR_FILE_NAME)
 
     DNN_LR_CS_STD_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                              '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+                              '/' + Hierarchy.CATEGORY)
     DNN_LR_CS_STD_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                              '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
-    DNN_LR_CS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.CATEGORY +
-                              '/' + LR_FILE_NAME)
-    DNN_LR_CS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.SCENARIO +
-                              '/' + LR_FILE_NAME)
-    DNN_LR_CS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.SYMBOL +
-                            '/' + LR_FILE_NAME)
-    DNN_LR_CS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.TYPE +
-                          '/' + LR_FILE_NAME)
+                              '/' + Hierarchy.SCENARIO)
+    DNN_LR_CS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.CATEGORY)
+    DNN_LR_CS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.SCENARIO)
+    DNN_LR_CS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.SYMBOL)
+    DNN_LR_CS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/' + Hierarchy.TYPE)
 
     DNN_LR_GS_STD_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                              '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+                              '/' + Hierarchy.CATEGORY)
     DNN_LR_GS_STD_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                              '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
-    DNN_LR_GS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.CATEGORY +
-                              '/' + LR_FILE_NAME)
-    DNN_LR_GS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.SCENARIO +
-                              '/' + LR_FILE_NAME)
-    DNN_LR_GS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.SYMBOL +
-                            '/' + LR_FILE_NAME)
-    DNN_LR_GS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.TYPE +
-                          '/' + LR_FILE_NAME)
+                              '/' + Hierarchy.SCENARIO)
+    DNN_LR_GS_TOP_CATEGORY = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.CATEGORY)
+    DNN_LR_GS_TOP_SCENARIO = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.SCENARIO)
+    DNN_LR_GS_TOP_SYMBOL = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.SYMBOL)
+    DNN_LR_GS_TOP_TYPE = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/' + Hierarchy.TYPE)
 
     # ----------------------------------------------------------------------------------------------------------------
 
@@ -193,30 +184,30 @@ class FileSave:
                             '/' + Hierarchy.TYPE + '/' + CR_FILE_NAME)
 
     OTHER_LR_CS_STD_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+                                '/' + Hierarchy.CATEGORY)
     OTHER_LR_CS_STD_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+                                '/' + Hierarchy.SCENARIO)
     OTHER_LR_CS_TOP_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                                + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+                                + Hierarchy.CATEGORY)
     OTHER_LR_CS_TOP_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                                + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+                                + Hierarchy.SCENARIO)
     OTHER_LR_CS_TOP_SYMBOL = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                              + Hierarchy.SYMBOL + '/' + LR_FILE_NAME)
+                              + Hierarchy.SYMBOL)
     OTHER_LR_CS_TOP_TYPE = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                            + Hierarchy.TYPE + '/' + LR_FILE_NAME)
+                            + Hierarchy.TYPE)
 
     OTHER_LR_GS_STD_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+                                '/' + Hierarchy.CATEGORY)
     OTHER_LR_GS_STD_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+                                '/' + Hierarchy.SCENARIO)
     OTHER_LR_GS_TOP_CATEGORY = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
-                                '/' + Hierarchy.CATEGORY + '/' + LR_FILE_NAME)
+                                '/' + Hierarchy.CATEGORY)
     OTHER_LR_GS_TOP_SCENARIO = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
-                                '/' + Hierarchy.SCENARIO + '/' + LR_FILE_NAME)
+                                '/' + Hierarchy.SCENARIO)
     OTHER_LR_GS_TOP_SYMBOL = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
-                              '/' + Hierarchy.SYMBOL + '/' + LR_FILE_NAME)
+                              '/' + Hierarchy.SYMBOL)
     OTHER_LR_GS_TOP_TYPE = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
-                            '/' + Hierarchy.TYPE + '/' + LR_FILE_NAME)
+                            '/' + Hierarchy.TYPE)
 
 
 class MLType:
