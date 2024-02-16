@@ -77,7 +77,11 @@ class DNNModel:
         plt.xlabel('Epoch')
         plt.legend(loc='upper right')
 
-        plt.savefig(loss_rate_file_path)
+        try:
+            plt.savefig(loss_rate_file_path)
+        except Exception as e:
+            print(e)
+
         plt.close()
 
         pred_x = model.predict(X_test_scaled)

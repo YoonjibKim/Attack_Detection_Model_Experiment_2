@@ -216,9 +216,9 @@ class MLImplementation:
     def run(self):
         print('Running MLs')
 
-        self.__analyze_top_symbol_tournament(self.__cs_top_dict, Constant.FileSave.DNN_CR_CS_TOP_SYMBOL,
-                                             Constant.FileSave.OTHER_CR_CS_TOP_SYMBOL,
-                                             Constant.FileSave.DNN_LR_CS_TOP_SYMBOL)
+        # self.__analyze_top_symbol_tournament(self.__cs_top_dict, Constant.FileSave.DNN_CR_CS_TOP_SYMBOL,
+        #                                      Constant.FileSave.OTHER_CR_CS_TOP_SYMBOL,
+        #                                      Constant.FileSave.DNN_LR_CS_TOP_SYMBOL)
         self.__analyze_top_symbol_tournament(self.__gs_top_dict, Constant.FileSave.DNN_CR_GS_TOP_SYMBOL,
                                              Constant.FileSave.OTHER_CR_GS_TOP_SYMBOL,
                                              Constant.FileSave.DNN_LR_GS_TOP_SYMBOL)
