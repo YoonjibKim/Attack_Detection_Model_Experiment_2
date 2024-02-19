@@ -1,5 +1,7 @@
-from ML_Implementation.MLImplementation import MLImplementation
+from TournamentSelection import TournamentSelection
 
 if __name__ == '__main__':
-    mLImplementation = MLImplementation()
-    mLImplementation.run()
+    tournament = TournamentSelection()
+    tournament.run_match()
+
+

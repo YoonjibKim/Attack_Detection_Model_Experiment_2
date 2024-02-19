@@ -18,7 +18,7 @@ from ML_Algorithm.RandomForestModel import RandomForestModel
 from ML_Algorithm.SVMModel import SVMModel
 
 
-class MLImplementation:
+class TournamentMatch:
     def __init__(self):
         warnings.filterwarnings("ignore", category=FutureWarning)
 
@@ -37,7 +37,7 @@ class MLImplementation:
         self.__randomForestModel = RandomForestModel()
         self.__sVMModel = SVMModel()
 
-        self.__cs_stat_time_delta_dict, self.__gs_stat_time_delta_dict, self.__cs_top_dict, self.__gs_top_dict \
+        self._cs_stat_time_delta_dict, self._gs_stat_time_delta_dict, self._cs_top_dict, self._gs_top_dict \
             = self.__load_dataset()
 
     def __run_other_mls(self, training_feature_array, training_label_array,
@@ -94,10 +94,10 @@ class MLImplementation:
         gs_top_dict = {}
 
         for scenario, file_name in Constant.SCENARIO_NAME_DICT.items():
-            cs_stat_time_delta_file_path = Constant.FileLoad.CS_STAT_TIME_DELTA_DIR_PATH + '/' + file_name + '.json'
-            gs_stat_time_delta_file_path = Constant.FileLoad.GS_STAT_TIME_DELTA_DIR_PATH + '/' + file_name + '.json'
-            cs_top_file_path = Constant.FileLoad.CS_TOP_DIR_PATH + '/' + file_name + '.json'
-            gs_top_file_path = Constant.FileLoad.GS_TOP_DIR_PATH + '/' + file_name + '.json'
+            cs_stat_time_delta_file_path = Constant.LOADING_DB.CS_STAT_TIME_DELTA_DIR_PATH + '/' + file_name + '.json'
+            gs_stat_time_delta_file_path = Constant.LOADING_DB.GS_STAT_TIME_DELTA_DIR_PATH + '/' + file_name + '.json'
+            cs_top_file_path = Constant.LOADING_DB.CS_TOP_DIR_PATH + '/' + file_name + '.json'
+            gs_top_file_path = Constant.LOADING_DB.GS_TOP_DIR_PATH + '/' + file_name + '.json'
 
             with open(cs_stat_time_delta_file_path, 'r') as f:
                 param_cs_stat_time_delta_dict = json.load(f)
@@ -115,9 +115,10 @@ class MLImplementation:
 
         return cs_stat_time_delta_dict, gs_stat_time_delta_dict, cs_top_dict, gs_top_dict
 
-    def __analyze_top_symbol_tournament(self, dataset_dict, dnn_save_path, other_save_path, loss_rate_save_dir):
+    def _analyze_top_symbol_tournament(self, dataset_dict, dnn_save_path, other_save_path, loss_rate_save_dir):
         dnn_cs_top_result_dict = {}
         other_cs_top_result_dict = {}
+
         for scenario, category_dict in dataset_dict.items():
             dnn_param_category_dict = {}
             other_param_category_dict = {}
@@ -148,18 +149,16 @@ class MLImplementation:
                             loss_rate_file_path = loss_rate_save_dir + '/' + loss_rate_file_name
                             dnn_param_result_dict = self.__dNNModel.run(training_feature_array, training_label_array,
                                                                         testing_feature_array, testing_label_array,
-                                                                        Constant.Hierarchy.SYMBOL,
+                                                                        100,
                                                                         Constant.DNNParameters.LearningRate.STEP_3,
                                                                         loss_rate_file_path)
                             dnn_param_symbol_dict[symbol] = dnn_param_result_dict
-                            # dnn_param_symbol_dict[symbol] = None
 
-                            # print('Other MLs')
-                            # other_param_result_dict \
-                            #     = self.__run_other_mls(training_feature_array, training_label_array,
-                            #                            testing_feature_array, testing_label_array)
-                            # other_param_feature_type_dict[symbol] = other_param_result_dict
-                            other_param_feature_type_dict[symbol] = None
+                            print('Other MLs')
+                            other_param_result_dict \
+                                = self.__run_other_mls(training_feature_array, training_label_array,
+                                                       testing_feature_array, testing_label_array)
+                            other_param_symbol_dict[symbol] = other_param_result_dict
 
                     dnn_param_feature_type_dict[feature_type] = dnn_param_symbol_dict
                     other_param_feature_type_dict[feature_type] = other_param_symbol_dict
@@ -170,13 +169,14 @@ class MLImplementation:
 
         with open(dnn_save_path, 'w') as f:
             json.dump(dnn_cs_top_result_dict, f)
-        # with open(other_save_path, 'w') as f:
-        #     json.dump(other_cs_top_result_dict, f)
+        with open(other_save_path, 'w') as f:
+            json.dump(other_cs_top_result_dict, f)
 
-    def __analyze_stat_time_delta_category_tournament(self, dataset_dict, dnn_save_path, other_save_path,
-                                                      loss_rate_save_dir):
+    def _analyze_stat_time_delta_category_tournament(self, dataset_dict, dnn_save_path, other_save_path,
+                                                     loss_rate_save_dir):
         dnn_cs_stat_time_delta_result_dict = {}
         other_cs_stat_time_delta_result_dict = {}
+
         for scenario, category_dict in dataset_dict.items():
             dnn_param_category_dict = {}
             other_param_category_dict = {}
@@ -194,42 +194,42 @@ class MLImplementation:
                 loss_rate_file_path = loss_rate_save_dir + '/' + loss_rate_file_name
                 dnn_param_result_dict \
                     = self.__dNNModel.run(training_feature_array, training_label_array, testing_feature_array,
-                                          testing_label_array, Constant.Hierarchy.CATEGORY,
-                                          Constant.DNNParameters.LearningRate.STEP_3, loss_rate_file_path)
+                                          testing_label_array, 100, Constant.DNNParameters.LearningRate.STEP_3,
+                                          loss_rate_file_path)
                 dnn_param_category_dict[category] = dnn_param_result_dict
-                # dnn_param_category_dict[category] = None
 
-                # print('Other MLs')
-                # other_param_category_dict[category] \
-                #     = self.__run_other_mls(training_feature_array, training_label_array,
-                #                            testing_feature_array, testing_label_array)
-                other_param_category_dict[category] = None
+                print('Other MLs')
+                other_param_category_dict[category] \
+                    = self.__run_other_mls(training_feature_array, training_label_array,
+                                           testing_feature_array, testing_label_array)
 
             dnn_cs_stat_time_delta_result_dict[scenario] = dnn_param_category_dict
             other_cs_stat_time_delta_result_dict[scenario] = other_param_category_dict
 
         with open(dnn_save_path, 'w') as f:
             json.dump(dnn_cs_stat_time_delta_result_dict, f)
-        # with open(other_save_path, 'w') as f:
-        #     json.dump(other_cs_stat_time_delta_result_dict, f)
+        with open(other_save_path, 'w') as f:
+            json.dump(other_cs_stat_time_delta_result_dict, f)
 
-    def run(self):
-        print('Running MLs')
+    def _run_first_match(self):
+        print('Running the first match')
 
-        # self.__analyze_top_symbol_tournament(self.__cs_top_dict, Constant.FileSave.DNN_CR_CS_TOP_SYMBOL,
-        #                                      Constant.FileSave.OTHER_CR_CS_TOP_SYMBOL,
-        #                                      Constant.FileSave.DNN_LR_CS_TOP_SYMBOL)
-        self.__analyze_top_symbol_tournament(self.__gs_top_dict, Constant.FileSave.DNN_CR_GS_TOP_SYMBOL,
-                                             Constant.FileSave.OTHER_CR_GS_TOP_SYMBOL,
-                                             Constant.FileSave.DNN_LR_GS_TOP_SYMBOL)
+        self._analyze_top_symbol_tournament(self._cs_top_dict, Constant.FILE_PATH.DNN_CR_CS_TOP_INIT_MATCH,
+                                            Constant.FILE_PATH.OTHER_CR_CS_TOP_INIT_MATCH,
+                                            Constant.FILE_PATH.DNN_LR_CS_TOP_INIT_MATCH)
 
-        self.__analyze_stat_time_delta_category_tournament(self.__cs_stat_time_delta_dict,
-                                                           Constant.FileSave.DNN_CR_CS_STD_CATEGORY,
-                                                           Constant.FileSave.OTHER_CR_CS_STD_CATEGORY,
-                                                           Constant.FileSave.DNN_LR_CS_STD_CATEGORY)
-        self.__analyze_stat_time_delta_category_tournament(self.__gs_stat_time_delta_dict,
-                                                           Constant.FileSave.DNN_CR_GS_STD_CATEGORY,
-                                                           Constant.FileSave.OTHER_CR_GS_STD_CATEGORY,
-                                                           Constant.FileSave.DNN_LR_GS_STD_CATEGORY)
+        self._analyze_top_symbol_tournament(self._gs_top_dict, Constant.FILE_PATH.DNN_CR_GS_TOP_INIT_MATCH,
+                                            Constant.FILE_PATH.OTHER_CR_GS_TOP_INIT_MATCH,
+                                            Constant.FILE_PATH.DNN_LR_GS_TOP_INIT_MATCH)
 
-        print('Running MLs is done.')
+        self._analyze_stat_time_delta_category_tournament(self._cs_stat_time_delta_dict,
+                                                          Constant.FILE_PATH.DNN_CR_CS_STD_INIT_MATCH,
+                                                          Constant.FILE_PATH.OTHER_CR_CS_STD_INIT_MATCH,
+                                                          Constant.FILE_PATH.DNN_LR_CS_STD_INIT_MATCH)
+
+        self._analyze_stat_time_delta_category_tournament(self._gs_stat_time_delta_dict,
+                                                          Constant.FILE_PATH.DNN_CR_GS_STD_INIT_MATCH,
+                                                          Constant.FILE_PATH.OTHER_CR_GS_STD_INIT_MATCH,
+                                                          Constant.FILE_PATH.DNN_LR_GS_STD_INIT_MATCH)
+
+        print('Running the first match is done.')

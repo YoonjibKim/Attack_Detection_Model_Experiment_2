@@ -11,8 +11,7 @@ from sklearn.preprocessing import StandardScaler
 class DNNModel:
     @classmethod
     def run(cls, training_feature_array, training_label_array, testing_feature_array, testing_label_array,
-            epoch_step, learning_rate, loss_rate_file_path) -> dict:
-        epochs = Constant.DNNParameters.epochStep[epoch_step]
+            epochs, learning_rate, loss_rate_file_path) -> dict:
 
         patience = epochs  # 추후 조정 필요
 
