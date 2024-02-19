@@ -211,7 +211,7 @@ class TournamentMatch:
         with open(other_save_path, 'w') as f:
             json.dump(other_cs_stat_time_delta_result_dict, f)
 
-    def _run_first_match(self):
+    def _run_initial_match(self):
         print('Running the first match')
 
         self._analyze_top_symbol_tournament(self._cs_top_dict, Constant.FILE_PATH.DNN_CR_CS_TOP_INIT_MATCH,
