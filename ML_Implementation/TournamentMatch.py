@@ -199,9 +199,10 @@ class TournamentMatch:
                 dnn_param_category_dict[category] = dnn_param_result_dict
 
                 print('Other MLs')
-                other_param_category_dict[category] \
+                other_param_result_dict \
                     = self.__run_other_mls(training_feature_array, training_label_array,
                                            testing_feature_array, testing_label_array)
+                other_param_category_dict[category] = other_param_result_dict
 
             dnn_cs_stat_time_delta_result_dict[scenario] = dnn_param_category_dict
             other_cs_stat_time_delta_result_dict[scenario] = other_param_category_dict
@@ -214,22 +215,26 @@ class TournamentMatch:
     def _run_initial_match(self):
         print('Running the first match')
 
-        self._analyze_top_symbol_tournament(self._cs_top_dict, Constant.FILE_PATH.DNN_CR_CS_TOP_INIT_MATCH,
-                                            Constant.FILE_PATH.OTHER_CR_CS_TOP_INIT_MATCH,
-                                            Constant.FILE_PATH.DNN_LR_CS_TOP_INIT_MATCH)
+        self._analyze_top_symbol_tournament(self._cs_top_dict,
+                                            Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_CS_TOP_INIT_MATCH,
+                                            Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_CS_TOP_INIT_MATCH,
+                                            Constant.LOSS_RATE_DIR_PATH.DNN_CS_TOP_INIT_MATCH)
 
-        self._analyze_top_symbol_tournament(self._gs_top_dict, Constant.FILE_PATH.DNN_CR_GS_TOP_INIT_MATCH,
-                                            Constant.FILE_PATH.OTHER_CR_GS_TOP_INIT_MATCH,
-                                            Constant.FILE_PATH.DNN_LR_GS_TOP_INIT_MATCH)
+        self._analyze_top_symbol_tournament(self._gs_top_dict,
+                                            Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_GS_TOP_INIT_MATCH,
+                                            Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_GS_TOP_INIT_MATCH,
+                                            Constant.LOSS_RATE_DIR_PATH.DNN_GS_TOP_INIT_MATCH)
 
-        self._analyze_stat_time_delta_category_tournament(self._cs_stat_time_delta_dict,
-                                                          Constant.FILE_PATH.DNN_CR_CS_STD_INIT_MATCH,
-                                                          Constant.FILE_PATH.OTHER_CR_CS_STD_INIT_MATCH,
-                                                          Constant.FILE_PATH.DNN_LR_CS_STD_INIT_MATCH)
+        self._analyze_stat_time_delta_category_tournament(
+            self._cs_stat_time_delta_dict,
+            Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_CS_STD_INIT_MATCH,
+            Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_CS_STD_INIT_MATCH,
+            Constant.LOSS_RATE_DIR_PATH.DNN_CS_STD_INIT_MATCH)
 
-        self._analyze_stat_time_delta_category_tournament(self._gs_stat_time_delta_dict,
-                                                          Constant.FILE_PATH.DNN_CR_GS_STD_INIT_MATCH,
-                                                          Constant.FILE_PATH.OTHER_CR_GS_STD_INIT_MATCH,
-                                                          Constant.FILE_PATH.DNN_LR_GS_STD_INIT_MATCH)
+        self._analyze_stat_time_delta_category_tournament(
+            self._gs_stat_time_delta_dict,
+            Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_GS_STD_INIT_MATCH,
+            Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_GS_STD_INIT_MATCH,
+            Constant.LOSS_RATE_DIR_PATH.DNN_GS_STD_INIT_MATCH)
 
         print('Running the first match is done.')

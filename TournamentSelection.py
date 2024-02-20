@@ -8,22 +8,37 @@ class TournamentSelection(TournamentMatch):
         super().__init__()
 
         self.__dnn_cs_std_init_match_result = None
+        self.__dnn_cs_top_init_match_result = None
         self.__dnn_gs_std_init_match_result = None
+        self.__dnn_gs_top_init_match_result = None
+
         self.__other_cs_std_init_match_result = None
+        self.__other_cs_top_init_match_result = None
         self.__other_gs_std_init_match_result = None
+        self.__other_gs_top_init_match_result = None
 
     def run_match(self):
         self._run_initial_match()
         self.__load_initial_match_score()
 
-    def __select_best_initial_match_result(self):
-        pass
-
     def __load_initial_match_score(self):
-        self.__dnn_cs_std_init_match_result = self.__load_file(Constant.FILE_PATH.DNN_CR_CS_STD_INIT_MATCH)
-        self.__dnn_gs_std_init_match_result = self.__load_file(Constant.FILE_PATH.DNN_CR_GS_STD_INIT_MATCH)
-        self.__other_cs_std_init_match_result = self.__load_file(Constant.FILE_PATH.OTHER_CR_CS_STD_INIT_MATCH)
-        self.__other_gs_std_init_match_result = self.__load_file(Constant.FILE_PATH.OTHER_CR_GS_STD_INIT_MATCH)
+        self.__dnn_cs_std_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_CS_STD_INIT_MATCH)
+        self.__dnn_cs_top_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_CS_TOP_INIT_MATCH)
+        self.__dnn_gs_std_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_GS_STD_INIT_MATCH)
+        self.__dnn_gs_top_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.DNN_CS_TOP_INIT_MATCH)
+
+        self.__other_cs_std_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_CS_STD_INIT_MATCH)
+        self.__other_cs_top_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_CS_TOP_INIT_MATCH)
+        self.__other_gs_std_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_GS_STD_INIT_MATCH)
+        self.__other_gs_top_init_match_result \
+            = self.__load_file(Constant.CLASSIFICATION_RESULT_FILE_PATH.OTHER_GS_TOP_INIT_MATCH)
 
     @classmethod
     def __load_file(cls, file_path) -> dict:

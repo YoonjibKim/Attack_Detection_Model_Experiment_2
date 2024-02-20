@@ -78,11 +78,6 @@ F1_SCORE = 'f1-score'
 WEIGHTED_AVG = 'weighted avg'
 
 
-class Hierarchy:
-    Initial_Match = 'Initial_Match'
-    Final_Match = 'Final_Match'
-
-
 class DNNParameters:
     class LearningRate:
         STEP_1 = 0.01
@@ -101,85 +96,24 @@ class LOADING_DB:
     GS_TOP_DIR_PATH = TOP_DIR_PATH + '/' + GS
 
 
-class FILE_PATH:
-    ML_RESULT = 'ML_Result'
-    DNN = 'DNN'
-    OTHERS = 'Others'
-    CLASSIFICATION_RESULT = 'Classification_Result'
-    LOSS_RATE = 'Loss_Rate'
-    CR_FILE_NAME = 'result.json'
+class CLASSIFICATION_RESULT_FILE_PATH:
+    DNN_CS_STD_INIT_MATCH = 'ML_Result/DNN/Classification_Result/CS/STAT_TIME_DELTA/Initial_Match/Result.json'
+    DNN_CS_TOP_INIT_MATCH = 'ML_Result/DNN/Classification_Result/CS/TOP/Initial_Match/Result.json'
+    DNN_GS_STD_INIT_MATCH = 'ML_Result/DNN/Classification_Result/GS/STAT_TIME_DELTA/Initial_Match/Result.json'
+    DNN_GS_TOP_INIT_MATCH = 'ML_Result/DNN/Classification_Result/GS/TOP/Initial_Match/Result.json'
 
-    DNN_CR_CS_STD_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    DNN_CR_CS_TOP_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
-                                '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    DNN_CR_GS_STD_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    DNN_CR_GS_TOP_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
-                                '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    DNN_LR_CS_STD_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.Initial_Match)
-    DNN_LR_CS_TOP_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                                + Hierarchy.Initial_Match)
-    DNN_LR_GS_STD_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                                '/' + Hierarchy.Initial_Match)
-    DNN_LR_GS_TOP_INIT_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/'
-                                + Hierarchy.Initial_Match)
+    OTHER_CS_STD_INIT_MATCH = 'ML_Result/Others/Classification_Result/CS/STAT_TIME_DELTA/Initial_Match/Result.json'
+    OTHER_CS_TOP_INIT_MATCH = 'ML_Result/Others/Classification_Result/CS/TOP/Initial_Match/Result.json'
+    OTHER_GS_STD_INIT_MATCH = 'ML_Result/Others/Classification_Result/GS/STAT_TIME_DELTA/Initial_Match/Result.json'
+    OTHER_GS_TOP_INIT_MATCH = 'ML_Result/Others/Classification_Result/GS/TOP/Initial_Match/Result.json'
 
-    OTHER_CR_CS_STD_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS +
-                                  '/' + STAT_TIME_DELTA + '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    OTHER_CR_CS_TOP_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
-                                  '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    OTHER_CR_GS_STD_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/'
-                                  + STAT_TIME_DELTA + '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    OTHER_CR_GS_TOP_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
-                                  '/' + Hierarchy.Initial_Match + '/' + CR_FILE_NAME)
-    OTHER_LR_CS_STD_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                                  '/' + Hierarchy.Initial_Match)
-    OTHER_LR_CS_TOP_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                                  + Hierarchy.Initial_Match)
-    OTHER_LR_GS_STD_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                                  '/' + Hierarchy.Initial_Match)
-    OTHER_LR_GS_TOP_INIT_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
-                                  '/' + Hierarchy.Initial_Match)
 
-    # ----------------------------------------------------------------------------------------------------------------
+class LOSS_RATE_DIR_PATH:
+    DNN_CS_TOP_INIT_MATCH = 'ML_Result/DNN/Loss_Rate/CS/TOP/Initial_Match'
+    DNN_GS_TOP_INIT_MATCH = 'ML_Result/DNN/Loss_Rate/GS/TOP/Initial_Match'
 
-    DNN_CR_CS_STD_FINAL_MATCH = (
-                ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + STAT_TIME_DELTA +
-                '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    DNN_CR_CS_TOP_FINAL_MATCH = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
-                                 '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    DNN_CR_GS_STD_FINAL_MATCH = (
-                ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + STAT_TIME_DELTA +
-                '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    DNN_CR_GS_TOP_FINAL_MATCH = (ML_RESULT + '/' + DNN + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
-                                 '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    DNN_LR_CS_STD_FINAL_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                                 '/' + Hierarchy.Final_Match)
-    DNN_LR_CS_TOP_FINAL_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                                 + Hierarchy.Final_Match)
-    DNN_LR_GS_STD_FINAL_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                                 '/' + Hierarchy.Final_Match)
-    DNN_LR_GS_TOP_FINAL_MATCH = (ML_RESULT + '/' + DNN + '/' + LOSS_RATE + '/' + GS + '/' + TOP + '/'
-                                 + Hierarchy.Final_Match)
-
-    OTHER_CR_CS_STD_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS +
-                                   '/' + STAT_TIME_DELTA + '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    OTHER_CR_CS_TOP_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + CS + '/' + TOP +
-                                   '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    OTHER_CR_GS_STD_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/'
-                                   + STAT_TIME_DELTA + '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    OTHER_CR_GS_TOP_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + CLASSIFICATION_RESULT + '/' + GS + '/' + TOP +
-                                   '/' + Hierarchy.Final_Match + '/' + CR_FILE_NAME)
-    OTHER_LR_CS_STD_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + STAT_TIME_DELTA +
-                                   '/' + Hierarchy.Final_Match)
-    OTHER_LR_CS_TOP_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + CS + '/' + TOP + '/'
-                                   + Hierarchy.Final_Match)
-    OTHER_LR_GS_STD_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + STAT_TIME_DELTA +
-                                   '/' + Hierarchy.Final_Match)
-    OTHER_LR_GS_TOP_FINAL_MATCH = (ML_RESULT + '/' + OTHERS + '/' + LOSS_RATE + '/' + GS + '/' + TOP +
-                                   '/' + Hierarchy.Final_Match)
+    DNN_CS_STD_INIT_MATCH = 'ML_Result/DNN/Loss_Rate/CS/STAT_TIME_DELTA/Initial_Match'
+    DNN_GS_STD_INIT_MATCH = 'ML_Result/DNN/Loss_Rate/GS/STAT_TIME_DELTA/Initial_Match'
 
 
 class MLType:
